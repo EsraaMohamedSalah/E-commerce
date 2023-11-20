@@ -12,71 +12,85 @@ class SignupScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Sign Up'),
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.blue,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/logo2.png',
-                  width: 200, // Adjust the width as needed
-                  height: 200, // Adjust the height as needed
-                ),
-                SizedBox(width: 10), // Add some spacing between the logo and text
-                Text(
-                  'Shopi - My',
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/image-ecommerce.webp'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 50), // Add some spacing between the logo and text
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/logo2.png',
+                    width: 70,
+                    height: 50,
+                  ),
+                  SizedBox(width: 1),
+                  Text(
+                    'Shopimy',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 20),
+              CustomTextField(
+                controller: emailController,
+                labelText: 'Email',
+                fontSize: 12.0,
+
+                width: 180.0,
+              ),
+              SizedBox(height: 20),
+              CustomTextField(
+                controller: passwordController,
+                labelText: 'Password',
+                fontSize: 12.0, // Set the desired font size
+
+                width: 180.0,
+                obscureText: true,
+              ),
+              SizedBox(height: 20),
+              CustomButton(
+                onPressed: () {
+
+                  Navigator.pop(context);
+                },
+                text: 'Sign Up',
+                backgroundColor: Colors.blue,
+                textColor: Colors.white,
+              ),
+              SizedBox(height: 10),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                child: Text(
+                  'Already have an account? Log In',
                   style: TextStyle(
-                    fontSize: 20, // Adjust the font size as needed
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue, // Adjust the text color
+                    fontSize: 12,
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
                   ),
                 ),
-              ],
-            ),
-           // FlutterLogo(size: 100, textColor: Colors.orange),
-
-            SizedBox(height: 20),
-            CustomTextField(
-              controller: emailController,
-              labelText: 'Email',
-            ),
-            SizedBox(height: 20),
-            CustomTextField(
-              controller: passwordController,
-              labelText: 'Password',
-              obscureText: true,
-            ),
-            SizedBox(height: 20),
-            CustomButton(
-              onPressed: () {
-                // Add signup logic here
-                // For simplicity, let's just navigate back to the login page
-                Navigator.pop(context);
-              },
-              text: 'Sign Up',
-              backgroundColor: Colors.orange,
-              textColor: Colors.white,
-            ),
-            SizedBox(height: 10),
-            GestureDetector(
-              onTap: () {
-                // Navigate to the login page
-                Navigator.pushNamed(context, '/login');
-              },
-              child: Text(
-                'Already have an account? Log In',
-                style: TextStyle(
-                  color: Colors.orange,
-                  decoration: TextDecoration.underline,
-                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

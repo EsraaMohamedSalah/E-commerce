@@ -1,11 +1,20 @@
 // In home_page.dart
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled/widgets/carousel_slider_widget.dart';
 
 import 'auth_service.dart';
 
 class HomePage extends StatelessWidget {
   final AuthService authService = AuthService();
+  final List<String> images = [
+    'assets/clothes1.jpg',
+    'assets/clothes2.jpg',
+    'assets/clothes3.webp',
+    'assets/clothes4.webp',
+    'assets/clothes5.jpg',
+
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +43,19 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          color: Colors.pink,
-          image: DecorationImage(
-            image: AssetImage('assets/home-page.jpg'),
-            fit: BoxFit.cover,
-          ),
+      body: Center(
+        child:CarouselSliderWidget<String>(
+          items: images,
+          itemBuilder: (imagePath) {
+            return Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(imagePath),
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

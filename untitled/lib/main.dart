@@ -125,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
           _buildTextFieldWithIcon(Icons.person_2_outlined, 'UserName', false,false,false),
           _buildTextFieldWithIcon(Icons.lock_outline, 'Password', true,false,false),
           SizedBox(height: 20),
-          _buildSignUpButton(),
+          _buildSignUpButton('Sign Up'),
           SizedBox(height: 20),
           RichText(
             text: TextSpan(
@@ -167,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
           _buildTextFieldWithIcon(Icons.email_outlined, 'Email', false,true,true),
           _buildTextFieldWithIcon(Icons.lock_outline, 'Password', true,false,false),
           SizedBox(height: 20),
-          _buildSignUpButton(),
+          _buildSignUpButton('Log In'),
           SizedBox(height: 20),
           RichText(
             text: TextSpan(
@@ -211,7 +211,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
           SizedBox(height: 20),
 
           _buildTextFieldWithIcon(Icons.email_outlined, 'Email', false,true,true),
-          _buildSignUpButton(),
+          _buildSignUpButton('Send EMail'),
           SizedBox(height: 20),
         ],
       ),
@@ -272,7 +272,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     );
   }
 
-  Widget _buildSignUpButton() {
+  Widget _buildSignUpButton(String btntitle) {
     return Container(
       width: 800,
       decoration: BoxDecoration(
@@ -289,7 +289,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
           children: [
             Expanded(
               child: Text(
-                'Sign Up',
+                btntitle,
                 style: TextStyle(color: Colors.white),
               ),
             ),

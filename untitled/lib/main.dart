@@ -90,9 +90,9 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
 
                     controller: _tabController,
                     children: [
-                      _buildTabContent('Email'),
-                      _buildTabContent('UserName'),
-                      _buildTabContent('Password'),
+                      _buildTabContent('Sign Up'),
+                      _buildTabContent('Log In'),
+                      _buildTabContent('Forgot Password'),
                     ],
                   ),
                 ),
@@ -115,8 +115,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
       ),
     );
   }
-
-  Widget _buildTabContent(String title) {
+  Widget _buildTab1Content() {
     return Container(
       padding: EdgeInsets.all(20),
       color: Theme.of(context).scaffoldBackgroundColor,
@@ -158,6 +157,81 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         ],
       ),
     );
+  }
+  Widget _buildTab2Content() {
+    return Container(
+      padding: EdgeInsets.all(20),
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Column(
+        children: [
+          _buildTextFieldWithIcon(Icons.email_outlined, 'Email', false,true,true),
+          _buildTextFieldWithIcon(Icons.lock_outline, 'Password', true,false,false),
+          SizedBox(height: 20),
+          _buildSignUpButton(),
+          SizedBox(height: 20),
+          RichText(
+            text: TextSpan(
+              text: 'Don’t have an account? Swipe right to  ',
+              style: TextStyle(
+                color:  Color(0xFF515C6F),
+              ),
+              children: [
+                TextSpan(
+                  text: 'create a new account.',
+
+                  style: TextStyle(
+                    color: Color(0xFFFF6969),
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+
+  }
+  Widget _buildTab3Content() {
+    return Container(
+      padding: EdgeInsets.all(20),
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Column(
+        children: [
+          RichText(
+            text: TextSpan(
+              text: 'Enter the email address you used to create your account and we will email you a link to reset your password',
+              style: TextStyle(
+                color:  Color(0xFF515C6F),
+              ),
+
+            ),
+          ),
+
+          SizedBox(height: 20),
+
+          _buildTextFieldWithIcon(Icons.email_outlined, 'Email', false,true,true),
+          _buildSignUpButton(),
+          SizedBox(height: 20),
+        ],
+      ),
+    );
+
+  }
+    Widget _buildTabContent(String title) {
+    switch (title) {
+      case 'Sign Up':
+        return _buildTab1Content();
+      case 'Log In':
+        return _buildTab2Content();
+      case 'Forgot Password':
+        return _buildTab3Content();
+      default:
+        return Container(); // Default case, can be an empty container or another default content
+    }
+
+
+
   }
 
   Widget _buildTextFieldWithIcon(IconData icon, String title, bool hasBottomBorder,bool hasupRadius,bool hasspacing  ) {
@@ -210,13 +284,17 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
           // Add your signup logic here
         },
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center
+          ,
           children: [
-            Text(
-              'Sign Up',
-              style: TextStyle(color: Colors.white),
+            Expanded(
+              child: Text(
+                'Sign Up',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
-            SizedBox(width: 10),
+
+            SizedBox(width: 5),
             Container(
               padding: EdgeInsets.all(1),
               decoration: BoxDecoration(

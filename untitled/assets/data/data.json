@@ -1,0 +1,57 @@
+{
+  "products" : [
+    {
+        "id" : "1",
+        "name" : "bag",
+        "categoryId" : "1",
+        "description" : "good material",
+        "prict" : 20,
+        "quantity" : 12
+    },
+    {
+        "id" : "2",
+        "name" : "shoes",
+        "categoryId" : "1",
+        "description" : "good material",
+        "prict" : 33,
+        "quantity" : 5
+    }
+    ],  
+  "categories" : [
+    {
+        "id" : "1",
+        "title" : "new clothes",
+        "description" : "clother Category"
+    },
+    {
+        "id" : "2",
+        "title" : "Assets",
+        "description" : "assets Category"
+    }
+
+    ],
+  "ads": [
+    {
+      "id": "1",
+      "image": "assets/clothes1.jpg",
+      "link": "/ad_details?id=1"
+    },
+    {
+      "id": "2",
+      "image": "assets/clothes2.jpg",
+      "link": "/ad_details?id=2"
+    },{
+      "id": "3",
+      "image": "assets/clothes3.webp",
+      "link": "/ad_details?id=3"
+    },{
+      "id": "4",
+      "image": "assets/clothes4.webp",
+      "link": "/ad_details?id=4"
+    },{
+      "id": "5",
+      "image": "assets/clothes5.jpg",
+      "link": "/ad_details?id=5"
+    }
+  ]
+}

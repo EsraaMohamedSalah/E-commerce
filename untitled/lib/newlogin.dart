@@ -1,17 +1,7 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-    );
-  }
-}
+import 'package:untitled/screens/tabs/tab1.dart';
+import 'package:untitled/screens/tabs/tab2.dart';
+import 'package:untitled/screens/tabs/tab3.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -30,25 +20,43 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Your App Name'),
-        backgroundColor: Colors.grey,
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: [
-            _buildTab('Tab 1'),
-            _buildTab('Tab 2'),
-            _buildTab('Tab 3'),
-          ],
+      body: Container(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: Padding(
+          padding: EdgeInsets.only(top: 50),
+          child: Column(
+            children: [
+              TabBar(
+                controller: _tabController,
+                tabs: [
+                  _buildTab('Sign Up'),
+                  _buildTab('Log In'),
+                  _buildTab('Forgot Password'),
+                ],
+                labelColor: Color(0xFF515C6F),
+                unselectedLabelColor: Colors.black.withOpacity(0.3),
+                indicator: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 0.0, color: Colors.transparent),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      Tab1Content(),
+                      Tab2Content(),
+                      Tab3Content(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          _buildTabContent('Email'),
-          _buildTabContent('UserName'),
-          _buildTabContent('Password'),
-        ],
       ),
     );
   }
@@ -60,62 +68,6 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         style: TextStyle(
           fontSize: 30,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF515C6F),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTabContent(String title) {
-    return Container(
-      padding: EdgeInsets.all(20),
-      color: Colors.white,
-      child: Column(
-        children: [
-          _buildTextFieldWithIcon(Icons.email, 'Email'),
-          _buildTextFieldWithIcon(Icons.person, 'UserName'),
-          _buildTextFieldWithIcon(Icons.lock, 'Password'),
-          SizedBox(height: 20),
-          _buildSignUpButton(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTextFieldWithIcon(IconData icon, String title) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: TextField(
-        decoration: InputDecoration(
-          prefixIcon: Icon(icon),
-          labelText: title,
-          border: OutlineInputBorder(),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSignUpButton() {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.blue, // Change the color as needed
-      ),
-      child: TextButton(
-        onPressed: () {
-          // Add your signup logic here
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Sign Up',
-              style: TextStyle(color: Colors.white),
-            ),
-            SizedBox(width: 10),
-            Icon(Icons.arrow_forward, color: Colors.white),
-          ],
         ),
       ),
     );

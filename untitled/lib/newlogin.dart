@@ -26,18 +26,21 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
           padding: EdgeInsets.only(top: 50),
           child: Column(
             children: [
-              TabBar(
-                controller: _tabController,
-                tabs: [
-                  _buildTab('Sign Up'),
-                  _buildTab('Log In'),
-                  _buildTab('Forgot Password'),
-                ],
-                labelColor: Color(0xFF515C6F),
-                unselectedLabelColor: Colors.black.withOpacity(0.3),
-                indicator: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 0.0, color: Colors.transparent),
+              Theme(
+                data: Theme.of(context).copyWith(colorScheme: Theme.of(context).colorScheme.copyWith(surfaceVariant: Colors.transparent)),
+                child: TabBar(
+                  controller: _tabController,
+                  tabs: [
+                    _buildTab('Sign Up'),
+                    _buildTab('Log In'),
+                    _buildTab('Forgot Password'),
+                  ],
+                  labelColor: Color(0xFF515C6F),
+                  unselectedLabelColor: Colors.black.withOpacity(0.3),
+                  indicator: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 0.0, color: Colors.transparent),
+                    ),
                   ),
                 ),
               ),

@@ -15,7 +15,7 @@ class Tab1Content extends StatelessWidget {
           CommonWidgets.buildTextFieldWithIcon(Icons.lock_outline, 'Password', true, false, false),
           SizedBox(height: 20),
           CommonWidgets.buildSignUpButton(),
-          SizedBox(height: 20),
+          SizedBox(height: 1),
           // ... rest of your code
         ],
       ),

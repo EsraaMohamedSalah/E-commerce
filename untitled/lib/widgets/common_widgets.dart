@@ -54,7 +54,7 @@ class CommonWidgets {
 
   static Widget buildSignUpButton() {
     return Container(
-      width: 800,
+      width: 400,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Color(0xFFFF6969), // Change the color as needed
@@ -185,5 +185,46 @@ class CommonWidgets {
   }
 
 
+static Widget buildSeeMoreButton(){
+    return
+      Row(
+        children: [
+          Container(
+            width: 120, // Set your preferred width
+            child: ElevatedButton(
+              onPressed: () {
+                // Handle "See more" button press
+              },
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 16), // Adjust padding as needed
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('See more'),
+                  Container(
+                    width: 18, // Set your preferred size for the red background
+                    height: 18,
+                    //padding: EdgeInsets.all(4),
+                    padding: EdgeInsets.all(0.5),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFFFF6969), // Set the background color to red
+                    ),
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 14,
 
+                      color: Colors.white, // Change the color as needed
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+
+      );
+
+}
 }

@@ -4,17 +4,40 @@
         "id" : "1",
         "name" : "bag",
         "categoryId" : "1",
-        "description" : "good material",
-        "prict" : 20,
-        "quantity" : 12
+        "description" : "Grey Bag with good material",
+        "price" : "20 $",
+      "image": "assets/product1.jpg",
+      "color":  ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF"],
+      "size": ["4", "4.5", "5", "5.5"],
+        "quantity" : "12",
+      "images": ["assets/product1.jpg","assets/product1-1.jpg","assets/product1-2.jpg"]
     },
     {
         "id" : "2",
         "name" : "shoes",
         "categoryId" : "1",
-        "description" : "good material",
-        "prict" : 33,
-        "quantity" : 5
+        "description" : "Pink faux boots",
+        "price" : "33 $",
+      "image": "assets/product3.jpg",
+      "color":  ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF"],
+      "size": ["Small", "Medium", "Large", "XL"],
+      "images": ["assets/product3-1.jpg","assets/product3-3.jpeg","assets/product3-2.jpg"],
+
+
+        "quantity" : "5"
+    },
+    {
+      "id" : "3",
+      "name" : "black Jacket",
+      "categoryId" : "2",
+      "description" : "black jacket amazing design",
+      "price" : "120 $",
+      "image": "assets/product4.jpg",
+      "color":  ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF"],
+      "size": ["Small", "Medium", "Large", "XL"],
+      "images": ["assets/product4.jpg","assets/product4-1.jpeg"],
+
+      "quantity" : "5"
     }
     ],  
   "categories" : [
@@ -34,24 +57,29 @@
     {
       "id": "1",
       "image": "assets/clothes1.jpg",
-      "link": "/ad_details?id=1"
+      "link": "/ad_details?id=1",
+      "description": "For all your summer clothing neededs"
     },
     {
       "id": "2",
       "image": "assets/clothes2.jpg",
-      "link": "/ad_details?id=2"
+      "link": "/ad_details?id=2",
+      "description": "Step into style with our footwear"
     },{
       "id": "3",
       "image": "assets/clothes3.webp",
-      "link": "/ad_details?id=3"
+      "link": "/ad_details?id=3",
+      "description": "Explore our latest collection"
     },{
       "id": "4",
       "image": "assets/clothes4.webp",
-      "link": "/ad_details?id=4"
+      "link": "/ad_details?id=4",
+      "description": "For all your summer clothing neededs"
     },{
       "id": "5",
       "image": "assets/clothes5.jpg",
-      "link": "/ad_details?id=5"
+      "link": "/ad_details?id=5",
+      "description": "Step into style with our footwear"
     }
   ]
 }

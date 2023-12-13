@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'ProductDetailsPage.dart';
 
 
-class Products {
+class Products extends ChangeNotifier{
   final String id;
   final String image;
   final String link;
@@ -51,6 +51,11 @@ final List<String> size;
       images: imagelist,
 
     );
+
+  }
+  void updateProductData() {
+    // Perform any necessary state updates
+    notifyListeners();
   }
   @override
   Widget build(BuildContext context) {

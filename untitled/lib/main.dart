@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:untitled/screens/login_screen.dart';
 import 'package:untitled/screens/signup_screen.dart';
 import 'package:untitled/home_page.dart';
 
+import 'app_data_provider.dart';
 import 'auth_service.dart';
 import 'newlogin.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => AppDataProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

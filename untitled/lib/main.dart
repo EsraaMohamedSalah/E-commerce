@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled/screens/login_screen.dart';
@@ -8,10 +9,24 @@ import 'app_data_provider.dart';
 import 'auth_service.dart';
 import 'newlogin.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: 'your_api_key',
+      authDomain: 'your_auth_domain',
+      projectId: 'your_project_id',
+      storageBucket: 'your_storage_bucket',
+      messagingSenderId: 'your_messaging_sender_id',
+      appId: 'e-commerce-a4590',
+    ),
+  );// Initialize Firebase
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => AppDataProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AuthService>(create: (context) => AuthService()),
+        ChangeNotifierProvider<AppDataProvider>(create: (context) => AppDataProvider()),
+      ],
       child: MyApp(),
     ),
   );

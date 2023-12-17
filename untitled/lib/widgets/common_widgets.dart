@@ -1,4 +1,10 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../auth_service.dart';
+import '../home_page.dart';
 
 class CommonWidgets {
 
@@ -52,7 +58,7 @@ class CommonWidgets {
     );
   }
 
-  static Widget buildSignUpButton() {
+  static Widget buildSignUpButton(BuildContext context) {
     return Container(
       width: 400,
       decoration: BoxDecoration(
@@ -60,13 +66,44 @@ class CommonWidgets {
         color: Color(0xFFFF6969), // Change the color as needed
       ),
       child: TextButton(
-        onPressed: () {
+        onPressed: () async {
+          final authService = context.read<AuthService>();
 
-          // Add your signup logic here
+          try {
+            await authService.signUp(
+              'test@example.com', // Replace with actual email
+              'password123', // Replace with actual password
+            );
+
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          }
+          catch (e) {
+            // Handle signup failure
+            print('Signup Error: $e'); // Print the error message
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text('Sign Up Failed'),
+                  content: Text('An error occurred during signup. Please try again.'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text('OK'),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
         },
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center
-          ,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
               child: Center(
@@ -76,22 +113,19 @@ class CommonWidgets {
                 ),
               ),
             ),
-
             SizedBox(width: 5),
             Container(
               padding: EdgeInsets.all(1),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.white,
-
               ),
               child: Icon(
                 Icons.arrow_forward_ios,
                 size: 20,
-                color:  Color(0xFFFF6969), // Change the color as needed
+                color: Color(0xFFFF6969),
               ),
             ),
-            //Icon(Icons.arrow_forward_rounded, color: Colors.white),
           ],
         ),
       ),

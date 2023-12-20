@@ -13,7 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: FirebaseOptions(
-      apiKey: 'your_api_key',
+      apiKey: 'AIzaSyAkuv66pmxljQMpFv1UB-7lnIFnKnJM8f4',
       authDomain: 'your_auth_domain',
       projectId: 'your_project_id',
       storageBucket: 'your_storage_bucket',

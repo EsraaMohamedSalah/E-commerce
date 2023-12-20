@@ -58,7 +58,14 @@ class CommonWidgets {
     );
   }
 
-  static Widget buildSignUpButton(BuildContext context) {
+  static Widget buildSignUpButton( {
+
+
+    required BuildContext context,
+    required TextEditingController emailController,
+    required TextEditingController passwordController,
+  }) {
+
     return Container(
       width: 400,
       decoration: BoxDecoration(
@@ -71,8 +78,10 @@ class CommonWidgets {
 
           try {
             await authService.signUp(
-              'test@example.com', // Replace with actual email
-              'password123', // Replace with actual password
+              emailController.text,
+              passwordController.text,
+              // 'test@example.com', // Replace with actual email
+              // 'password123', // Replace with actual password
             );
 
             Navigator.pushReplacement(

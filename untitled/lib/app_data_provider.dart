@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled/widgets/Ad.dart';
@@ -39,13 +40,24 @@ class AppDataProvider extends ChangeNotifier {
   }
 
   Future<void> loadCarouselData(BuildContext context) async {
-    String jsonString =
-    await DefaultAssetBundle.of(context).loadString('assets/data/data.json');
-    Map<String, dynamic> data = json.decode(jsonString);
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance
+          .collection('ads')
+          .get();
 
-    List<dynamic> adsList = data['ads'];
-    _ads = adsList.map((ad) => Ad.fromJson(ad)).toList();
+      _ads = snapshot.docs.map((doc) => Ad.fromJson(doc.data())).toList();
 
-    notifyListeners();
+      notifyListeners();
+    } catch (error) {
+      print('Error fetching ads: $error');
+    }
+    // String jsonString =
+    // await DefaultAssetBundle.of(context).loadString('assets/data/data.json');
+    // Map<String, dynamic> data = json.decode(jsonString);
+    //
+    // List<dynamic> adsList = data['ads'];
+    // _ads = adsList.map((ad) => Ad.fromJson(ad)).toList();
+    //
+    // notifyListeners();
   }
 }

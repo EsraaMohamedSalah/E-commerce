@@ -20,8 +20,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final AuthService authService = AuthService();
-  List<Ad> ads = [];
-  List<Products> products = [];
+  // List<Ad> ads = [];
+  // List<Products> products = [];
 
   @override
   void initState() {
@@ -30,116 +30,153 @@ class _HomePageState extends State<HomePage> {
     final appDataProvider = Provider.of<AppDataProvider>(context, listen: false);
     appDataProvider.loadCarouselData(context);
     appDataProvider.loadProductData(context);
+    appDataProvider.loadCategoryData(context);
+
   }
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Home Page'),
-          centerTitle: true,
-          backgroundColor: Colors.amberAccent,
-          actions: [
-            GestureDetector(
-              onTap: () async {
-                await authService.logout();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyHomePage(),
-                  ),
-                );
-              },
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Center(
-                  child: Text(
-                    'Logout',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
+      appBar: AppBar(
+        title: Text('Home Page'),
+        centerTitle: true,
+        backgroundColor: Colors.amberAccent,
+        actions: [
+          GestureDetector(
+            onTap: () async {
+              await authService.logout();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyHomePage(),
+                ),
+              );
+            },
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Center(
+                child: Text(
+                  'Logout',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
-          ],
-        ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(vertical: 16.0), // Adjust vertical padding as needed
-          child: Center(
-            child: Column(children: [
-              // Carousel Slider
-              Consumer<AppDataProvider>(
+          ),
+        ],
+      ),
+      body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+
+          children: [
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Categories',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            // Categories Section
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Consumer<AppDataProvider>(
                 builder: (context, appDataProvider, child) {
-                  return CarouselSlider(
-                    options: CarouselOptions(
-                      height: 250.0,
-                      enlargeCenterPage: true,
-                      autoPlay: true,
-                      onPageChanged: (index, reason) {
-                        // You can handle carousel page changes here
-                      },
-                    ),
-                    items: appDataProvider.ads.map((ad) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return MouseRegion(
-                            cursor: SystemMouseCursors.click,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => AdDetailsPage(adId: ad.link),
-                                  ),
-                                );
-                              },
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: MediaQuery.of(context).size.height,
-                                    margin: EdgeInsets.symmetric(horizontal: 5.0),
-                                    decoration: BoxDecoration(
-                                      color: Colors.transparent,
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      image: DecorationImage(
-                                        image: AssetImage(ad.image ?? ''),
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(16.0),
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        SizedBox(height: 8.0),
-                                        Text(
-                                          ad.description ?? '',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20.0,
-                                          ),
-                                        ),
-                                        SizedBox(height: 16.0),
-                                        CommonWidgets.buildSeeMoreButton(),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: appDataProvider.categories.map((category) {
+                        return Container(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            category.title ?? '',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0,
                             ),
-                          );
-                        },
-                      );
-                    }).toList(),
+                          ),
+                        );
+                      }).toList(),
+                    ),
                   );
                 },
               ),
+            ),
 
+            // Carousel Slider
+            Consumer<AppDataProvider>(
+              builder: (context, appDataProvider, child) {
+                return CarouselSlider(
+                  options: CarouselOptions(
+                    height: 250.0,
+                    enlargeCenterPage: true,
+                    autoPlay: true,
+                    onPageChanged: (index, reason) {
+                      // You can handle carousel page changes here
+                    },
+                  ),
+                  items: appDataProvider.ads.map((ad) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AdDetailsPage(adId: ad.link),
+                                ),
+                              );
+                            },
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: MediaQuery.of(context).size.height,
+                                  margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    image: DecorationImage(
+                                      image: NetworkImage(ad.image ?? ''),
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.all(16.0),
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(height: 8.0),
+                                      Text(
+                                        ad.description ?? '',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20.0,
+                                        ),
+                                      ),
+                                      SizedBox(height: 16.0),
+                                      CommonWidgets.buildSeeMoreButton(),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                );
+              },
+            ),
               SizedBox(height: 10),
 
               // Indicator Dots
@@ -189,8 +226,8 @@ class _HomePageState extends State<HomePage> {
 
 
             ]),
-          ),
-        ));
+
+        );
   }
   void _moveToCarouselIndex(int index) {
     final appDataProvider = Provider.of<AppDataProvider>(context, listen: false);

@@ -14,11 +14,11 @@ void main() async {
   await Firebase.initializeApp(
     options: FirebaseOptions(
       apiKey: 'AIzaSyAkuv66pmxljQMpFv1UB-7lnIFnKnJM8f4',
-      authDomain: 'your_auth_domain',
-      projectId: 'your_project_id',
-      storageBucket: 'your_storage_bucket',
+      authDomain: 'e-commerce-a4590.firebaseapp.com',
+      projectId: 'e-commerce-a4590',
+      storageBucket: 'e-commerce-a4590.appspot.com',
       messagingSenderId: 'your_messaging_sender_id',
-      appId: 'e-commerce-a4590',
+      appId: 'com.example.untitled',
     ),
   );// Initialize Firebase
   runApp(

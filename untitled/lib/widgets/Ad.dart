@@ -1,11 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Ad {
-  final String id;
   final String image;
   final String link;
   final String description;
 
   Ad({
-    required this.id,
     required this.image,
     required this.link,
     required this.description
@@ -13,10 +13,13 @@ class Ad {
 
   factory Ad.fromJson(Map<String, dynamic> json) {
     return Ad(
-      id: json['id'] ?? '',
       image: json['image'] ?? '',
       link: json['link'] ?? '',
       description: json['description']??'',
     );
+  }
+  factory Ad.fromFirestore(DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    Map<String, dynamic> json = snapshot.data() ?? {};
+    return Ad.fromJson(json);
   }
 }

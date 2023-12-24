@@ -145,7 +145,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         });
                       },
                       itemBuilder: (context, index) {
-                        return Image.asset(
+                        return Image.network(
                           widget.product.images[index],
                           width: 100,
                           height: 100,

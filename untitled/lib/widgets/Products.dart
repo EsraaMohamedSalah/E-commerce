@@ -1,10 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'ProductDetailsPage.dart';
 
 
 class Products extends ChangeNotifier{
-  final String id;
   final String image;
   final String link;
   final String name;
@@ -18,7 +18,6 @@ final List<String> size;
 
 
   Products({
-    required this.id,
     required this.image,
     required this.link,
     required this.description,
@@ -31,14 +30,16 @@ final List<String> size;
     required this.images,
 
   });
-
+  factory Products.fromFirestore(DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    Map<String, dynamic> json = snapshot.data() ?? {};
+    return Products.fromJson(json);
+  }
   factory Products.fromJson(Map<String, dynamic> json) {
     List<String> colorList = (json['color'] as List<dynamic>).map((e) => e.toString()).toList();
     List<String> sizeList = (json['size'] as List<dynamic>).map((e) => e.toString()).toList();
     List<String> imagelist= (json['images'] as List<dynamic>).map((e) => e.toString()).toList();
 
     return Products(
-      id: json['id'] ?? '',
       image: json['image'] ?? '',
       link: json['link'] ?? '',
       description: json['description']??'',
@@ -87,7 +88,7 @@ final List<String> size;
                 decoration: BoxDecoration(
                   //shape: BoxShape.circle, // Make it a circle (optional)
                   image: DecorationImage(
-                    image: AssetImage(image),
+                    image: NetworkImage(image),
                     fit: BoxFit.contain,
                     alignment: Alignment.center, // Center the image
                   ),

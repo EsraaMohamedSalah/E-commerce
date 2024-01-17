@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:untitled/screens/login_screen.dart';
 import 'package:untitled/screens/signup_screen.dart';
 import 'package:untitled/home_page.dart';
+import 'package:untitled/widgets/cart_provider.dart';
+import 'package:untitled/widgets/notification_provider.dart';
 
 import 'app_data_provider.dart';
 import 'auth_service.dart';
@@ -26,7 +28,9 @@ void main() async {
       providers: [
         ChangeNotifierProvider<AuthService>(create: (context) => AuthService()),
         ChangeNotifierProvider<AppDataProvider>(create: (context) => AppDataProvider()),
-      ],
+        ChangeNotifierProvider<NotificationProvider>(create: (context) => NotificationProvider()),
+
+        ChangeNotifierProvider(create: (context) => CartProvider()),],
       child: MyApp(),
     ),
   );
@@ -44,24 +48,7 @@ class MyApp extends StatelessWidget {
       home: MyHomePage(),
     );
   }
-    /*return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'E-commerce App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => SplashScreen(),
-        '/login': (context) => LoginScreen(),
-        '/signup': (context) => SignupScreen(),
-        '/main': (context) => HomePage(),
 
-      },
-    );
-  }*/
 }
 
 

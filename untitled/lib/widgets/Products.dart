@@ -73,7 +73,7 @@ final List<String> size;
           );
         },
         child: Container(
-          margin: EdgeInsets.all(1),
+          //margin: EdgeInsets.all(1),
           width: 100.0, // Set your preferred width
           decoration: BoxDecoration(
             color: Colors.white,

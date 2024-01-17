@@ -24,6 +24,7 @@ class _CarouselSliderWidgetState<T> extends State<CarouselSliderWidget<T>> {
           options: CarouselOptions(
             height: 200.0,
             autoPlay: true,
+
             onPageChanged: (index, reason) {
               setState(() {
                 _currentIndex = index;

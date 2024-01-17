@@ -64,6 +64,8 @@ class CommonWidgets {
     required BuildContext context,
     required TextEditingController emailController,
     required TextEditingController passwordController,
+    required TextEditingController usernameController,
+
   }) {
 
     return Container(
@@ -80,6 +82,8 @@ class CommonWidgets {
             await authService.signUp(
               emailController.text,
               passwordController.text,
+              usernameController.text,
+
               // 'test@example.com', // Replace with actual email
               // 'password123', // Replace with actual password
             );

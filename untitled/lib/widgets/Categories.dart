@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/allcategoriespage.dart';
 import 'ProductDetailsPage.dart';
 
 
@@ -43,56 +44,75 @@ class Categories extends ChangeNotifier{
   }
   @override
   Widget buildCategoryWidget(BuildContext context) {
-    return Container(
-      width: 120, // Adjust the size as needed
-      height: 120, // Adjust the size as needed
-      child: Stack(
-        alignment: Alignment.center,
+    return InkWell(
+      onTap: () {
+        if (title == 'See All') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AllCategoriesPage()),
+          );
+        } else {
+          // Handle click for other categories
+          // You can navigate to a specific category page or perform any other action
+        }
+      },
+      child: Column(
+      
         children: [
-          // Circular gradient background
           Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                colors: colors != null && colors!.length >= 2
-                    ? [Color(hexColor(colors![0]) as int), Color(hexColor(colors![1]) as int)]
-                    : [Colors.white, Colors.white], // Default colors
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: hexColor(shadowColor ?? ''),
-                  blurRadius: 10,
-                  offset: Offset(0, 5),
+            width: 65, // Adjust the size as needed
+            height: 65, // Adjust the size as needed
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // Circular gradient background
+                Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: colors != null && colors!.isNotEmpty
+                          ? colors!.map((color) => hexColor(color)).toList()
+                          : [Colors.white, Colors.white], // Default colors
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: hexColor(shadowColor ?? ''),
+                        blurRadius: 10,
+                        offset: Offset(0, 1),
+                      ),
+                    ],
+                  ),
                 ),
+      
+                // Image in the middle
+                Positioned(
+                  child: Image.network(
+                    image ?? '',
+                    width: 30, // Adjust the size as needed
+                    height: 30, // Adjust the size as needed
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                SizedBox(height: 10),
+      
+                // Text below the circle
               ],
             ),
           ),
-
-          // Image in the middle
-          Positioned(
-            child: Image.network(
-              image ?? '',
-              width: 80, // Adjust the size as needed
-              height: 80, // Adjust the size as needed
-              fit: BoxFit.cover,
-            ),
-          ),
-
-          // Text below the circle
           Positioned(
             bottom: 0,
             child: Text(
               title ?? '',
               style: TextStyle(
-                color: Colors.black, // Adjust the text color as needed
-                fontWeight: FontWeight.bold,
+                color: Color(0XFF515C6F), // Adjust the text color as needed
               ),
             ),
           ),
+      
         ],
       ),
     );

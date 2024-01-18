@@ -24,6 +24,8 @@ class _CarouselSliderWidgetState<T> extends State<CarouselSliderWidget<T>> {
           options: CarouselOptions(
             height: 200.0,
             autoPlay: true,
+            autoPlayInterval: Duration(seconds: 2), // Adjust this value
+            autoPlayAnimationDuration: Duration(milliseconds: 800), // Adjust this value
 
             onPageChanged: (index, reason) {
               setState(() {

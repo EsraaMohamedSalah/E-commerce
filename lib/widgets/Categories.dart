@@ -92,8 +92,8 @@ class Categories extends ChangeNotifier{
                 Positioned(
                   child: Image.network(
                     image ?? '',
-                    width: 30, // Adjust the size as needed
-                    height: 30, // Adjust the size as needed
+                    width: 50, // Adjust the size as needed
+                    height: 50, // Adjust the size as needed
                     fit: BoxFit.cover,
                   ),
                 ),

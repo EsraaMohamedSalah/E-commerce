@@ -142,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                         options: CarouselOptions(
                           height: 200.0,
                           //enlargeCenterPage: true,
-                          //autoPlay: true,
+                          autoPlay: true,
                           onPageChanged: (index, reason) {
                             // You can handle carousel page changes here
                           },
@@ -237,17 +237,20 @@ class _HomePageState extends State<HomePage> {
                     // Products section
                     Consumer<AppDataProvider>(
                       builder: (context, appDataProvider, child) {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: appDataProvider.products.asMap().entries.map((entry) {
-                            return Row(
-                              children: [
-                                entry.value.build(context),
-                                if (entry.key != appDataProvider.products.length - 1)
-                                  SizedBox(width: 13.0),
-                              ],
-                            );
-                          }).toList(),
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: appDataProvider.products.asMap().entries.map((entry) {
+                              return Row(
+                                children: [
+                                  entry.value.build(context),
+                                  if (entry.key != appDataProvider.products.length - 1)
+                                    SizedBox(width: 13.0),
+                                ],
+                              );
+                            }).toList(),
+                          ),
                         );
                       },
                     ),

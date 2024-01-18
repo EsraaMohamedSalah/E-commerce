@@ -23,6 +23,7 @@ class AuthService extends ChangeNotifier {
         await _firestore.collection('users').doc(user.uid).set({
           'email': email,
           'username': username,
+          'photoUrl':'https://img.icons8.com/?size=256&id=7819&format=png',
         });
       }
       SharedPreferences prefs = await SharedPreferences.getInstance();
